@@ -6,7 +6,7 @@ app.use(express.json()) //Indicamos que usaremos Json
 //puerto en que vamos a ver nuestra app: local host: 3000
 const port = 3000
 
-// HTTO METHODS
+// HTTPS METHODS
 app.get('/v1/explorers', (req, res) =>{
     console.log(`Api Explores GET ALL request ${new Date()}`)
     const explorer1 = {id: 1, name: "Kelvin1"}
@@ -16,6 +16,22 @@ app.get('/v1/explorers', (req, res) =>{
     const explorers = [explorer1, explorer2, explorer3, explorer4]
     res.status(200).json(explorers)
 })
+
+//Crear un endpoint que regrese un explorer mediante un id
+app.get('/v1/explorers/:id', (req, res) =>{
+    console.log(`Api Explores GET request ${new Date()}`)
+    console.log(`Getting explorer with id ${req.params.id}`)
+    const explorer = {id: 1, name: "Kelvin"}
+    res.status(200).json(explorer)
+})
+
+//Crerar un endpoint que se encargue de crear un explorer
+app.post('/v1/explorers', (req, res) => {
+    console.log(`Api Explorers POST request ${new Date()}`)
+    const requestBody = req.body //Parametros de un cliente
+    res.status(201).json({message: "Created"})
+})
+
 //con esto inicializamos esta app
 app.listen(port, () => {
     console.log(`Example app listening on port${port}`)
